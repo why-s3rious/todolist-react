@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Add from "./component/add";
+import List from "./component/list";
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  constructor(props){
+    super(props);
+    this.state = {
+      list:[
+        {title:"go to school",stt:1}
+      ]
+    }
+  }
+
+  DeleteNote=(note)=>
+  {
+    let temp =this.state.list;
+    console.log(temp);
+    console.log(temp.findIndex(e => e.stt == note.stt));
+    
+    temp.splice(temp.findIndex(e => e.stt ===note.stt),1);
+    // console.log(temp);
+    this.setState({
+      list:temp,
+    });
+
+  }
+
+  getInfo=(note)=>{
+
+
+    let x ={title:note,stt:this.state.list.length+1}
+    let temp =this.state.list;
+    temp.push(x);
+    // 
+    this.setState({
+      list:temp
+    });
+    console.log(this.state.list);
+  }
+  render() {
+    return (
+      <div>
+             <List list ={this.state.list} DeleteNote={this.DeleteNote}/>
+             <Add getInfo={this.getInfo}/>
+      </div>
+    );
+  }
 }
 
 export default App;
