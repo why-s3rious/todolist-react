@@ -18,16 +18,12 @@ class App extends Component {
   componentWillMount() {// khi reset lai trang se lay du lieu ra
     localStorage.getItem('listItem') && this.setState({
       list:JSON.parse(localStorage.getItem('listItem')),
-          
     });
-
   }
   editBtnClick=(note)=>{ // gui du lieu qua ben form input
     console.log(note);
-    this.setState({},()=>{ 
-      this.setState({
-        editNote:note
-      });
+    this.setState({
+      editNote:note
     });
     console.log(this.state.editNote);
   }
@@ -43,29 +39,18 @@ class App extends Component {
     })
   }
 
-
-
-
   componentWillUpdate(nextProps, nextState) { // sau khi update se luu vao localstorage
     console.log("componentWillUpdate")
     localStorage.setItem('listItem',JSON.stringify(nextState.list));
   }
   
-
-
-
-
-
-
-
-
   DeleteNote=(note)=>
   {
     let temp =this.state.list;
     console.log(temp);
-    console.log(temp.findIndex(e => e.stt == note.stt));
+    console.log(temp.findIndex(e => e.stt === note.stt));
     
-    temp.splice(temp.findIndex(e => e.stt ===note.stt),1);
+    temp.splice(temp.findIndex(e => e.stt === note.stt),1);
     // console.log(temp);
     this.setState({
       list:temp,
@@ -88,8 +73,8 @@ class App extends Component {
   render() {
     return (
       <div>
-             <List list ={this.state.list} DeleteNote={this.DeleteNote} editBtnClick={this.editBtnClick}/>
-             <Add getInfo={this.getInfo} editNote={this.state.editNote} editHandle={this.editHandle} />
+        <List list ={this.state.list} DeleteNote={this.DeleteNote} editBtnClick={this.editBtnClick}/>
+        <Add getInfo={this.getInfo} editNote={this.state.editNote} editHandle={this.editHandle} />
       </div>
     );
   }

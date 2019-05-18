@@ -7,30 +7,21 @@ class add extends Component {
         this.state={
             title:"",
         }
-
     }
-
 
     onChange=(event) =>{
         this.setState({
             [ event.target.name]:event.target.value,
          });
-
     }
     componentWillReceiveProps(nextProps) { //nhan duoc gia tri 
-        this.setState({},()=>{
-           this.setState({title:this.props.editNote.title})
-        });
+        this.setState({
+            title:this.props.editNote.title
+        })
         // console.log("componentWillReceiveProps");
         // console.log(this.state.title);
     }
-
-
-
-
-
     
-
 
     onSubmit=(event) => {
         //  this.props.getInfo(this.state.title)
@@ -38,23 +29,17 @@ class add extends Component {
         // console.log(this.state.title);
         // console.log(this.state.title.length);
 
-        if(this.state.title.length===0)
-        {
+        if(this.state.title.length === 0) {
             return 0;
         }
         this.props.getInfo(this.state.title);
 
     }
-    handleSubmit(event)
-    {
-        event.preventDefault();
-    }
-
     render() {
         return (
             <div className="container">
 
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e) => {e.preventDefault()}}>
                     <div className="input-group " style={{width:500,marginTop:50}}>
                         <input type="text" className="form-control" placeholder="Your note" name="title" value={this.state.title} onChange={this.onChange}/>
                         <div className="input-group-append">
