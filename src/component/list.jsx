@@ -6,7 +6,7 @@ class list extends Component {
 
         return this.props.list.map((obj,index)=>{
 
-            return <ToDo obj={obj} key={index} DeleteNote={this.props.DeleteNote}/>
+            return <ToDo obj={obj} key={index} DeleteNote={this.props.DeleteNote} editBtnClick={this.props.editBtnClick}/>
 
         });
 
